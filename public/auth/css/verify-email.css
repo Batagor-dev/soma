@@ -1,0 +1,139 @@
+/* ================================
+   VERIFY EMAIL PAGE
+================================ */
+
+.verify-container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    background: linear-gradient(135deg, #0077be 0%, #00a8e8 100%);
+}
+
+.verify-card {
+    background: white;
+    max-width: 460px;
+    width: 100%;
+    padding: 3rem 2.5rem;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 119, 190, 0.35);
+    text-align: center;
+}
+
+/* Icon */
+.verify-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1.5rem;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #0077be, #00a8e8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 12px 30px rgba(0, 119, 190, 0.45);
+}
+
+.verify-icon i {
+    font-size: 2.5rem;
+    color: white;
+}
+
+/* Title */
+.verify-title h2 {
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 0.5rem;
+}
+
+.verify-title p {
+    color: #6b7280;
+    font-size: 0.95rem;
+}
+
+/* Alert */
+.verify-alert {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+}
+
+.verify-alert.success {
+    background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+    color: #065f46;
+    border-left: 4px solid #10b981;
+}
+
+/* Info */
+.verify-info {
+    margin-top: 1.5rem;
+    text-align: left;
+    background: #f0f9ff;
+    padding: 1.25rem;
+    border-radius: 12px;
+    border: 2px solid rgba(0, 119, 190, 0.2);
+}
+
+.verify-info ul {
+    margin: 0;
+    padding-left: 1.25rem;
+}
+
+.verify-info li {
+    font-size: 0.9rem;
+    color: #374151;
+    margin-bottom: 0.5rem;
+}
+
+/* Button */
+.btn-verify {
+    margin-top: 1.75rem;
+    width: 100%;
+    height: 52px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #0077be, #00a8e8);
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-verify:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0, 119, 190, 0.45);
+}
+
+/* Back */
+.verify-back {
+    margin-top: 1.75rem;
+}
+
+.verify-back a {
+    color: #0077be;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.verify-back a:hover {
+    gap: 10px;
+}
+
+/* Responsive */
+@media (max-width: 576px) {
+    .verify-card {
+        padding: 2rem 1.5rem;
+    }
+}

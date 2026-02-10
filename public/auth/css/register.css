@@ -1,0 +1,299 @@
+
+/* Override dan perbaikan untuk auth-right */
+.auth-right {
+    background: white !important;
+    padding: 50px 45px !important;
+}
+
+.auth-right::before {
+    display: none;
+}
+
+/* Form styling yang lebih clean */
+.form-group-modern {
+    margin-bottom: 1.25rem;
+}
+
+.form-label-modern {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #1f2937;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.form-label-modern i {
+    color: #0077be;
+    margin-right: 6px;
+}
+
+.input-wrapper {
+    position: relative;
+}
+
+.form-control-modern {
+    width: 100%;
+    height: 50px;
+    padding: 0 15px;
+    border: 2px solid #e5e7eb;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    background: #fafafa;
+}
+
+.form-control-modern:focus {
+    outline: none;
+    border-color: #0077be;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(0, 119, 190, 0.1);
+}
+
+.form-control-modern.is-invalid {
+    border-color: #ef4444;
+    background: #fef2f2;
+}
+
+.form-control-modern.is-invalid:focus {
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+}
+
+.password-wrapper {
+    position: relative;
+}
+
+.password-toggle-btn {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #6b7280;
+    cursor: pointer;
+    padding: 5px;
+    transition: color 0.3s ease;
+}
+
+.password-toggle-btn:hover {
+    color: #0077be;
+}
+
+.invalid-feedback-modern {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 6px;
+    color: #ef4444;
+    font-size: 0.875rem;
+}
+
+/* Button styling */
+.btn-register {
+    width: 100%;
+    height: 50px;
+    background: linear-gradient(135deg, #0077be 0%, #00a8e8 100%);
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    margin-bottom: 1.5rem;
+}
+
+.btn-register:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 119, 190, 0.4);
+    background: linear-gradient(135deg, #005f8c 0%, #0077be 100%);
+}
+
+.btn-register:active {
+    transform: translateY(0);
+}
+
+/* Divider */
+.divider-or {
+    position: relative;
+    text-align: center;
+    margin: 1.5rem 0;
+}
+
+.divider-or::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: #e5e7eb;
+}
+
+.divider-or span {
+    position: relative;
+    background: white;
+    padding: 0 15px;
+    color: #9ca3af;
+    font-size: 0.875rem;
+}
+
+/* Login Card */
+.login-card {
+    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+    border: 2px solid rgba(0, 119, 190, 0.2);
+    border-radius: 12px;
+    padding: 1.25rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.login-card p {
+    margin-bottom: 0.75rem;
+    color: #374151;
+    font-weight: 500;
+}
+
+.login-link {
+    color: #0077be;
+    text-decoration: none;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: gap 0.3s ease;
+}
+
+.login-link:hover {
+    gap: 10px;
+}
+
+/* Benefits */
+.benefits-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 2px solid #f3f4f6;
+}
+
+.benefit-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.875rem;
+    color: #374151;
+}
+
+.benefit-item i {
+    color: #10b981;
+    font-size: 1rem;
+}
+
+/* Welcome Badge */
+.welcome-section {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.welcome-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+    color: #0077be;
+    padding: 8px 18px;
+    border-radius: 25px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.welcome-section h3 {
+    color: #1f2937;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.welcome-section p {
+    color: #6b7280;
+    margin-bottom: 0;
+}
+
+/* Alert styling */
+.alert-custom {
+    border: none;
+    border-radius: 10px;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 1.5rem;
+}
+
+.alert-custom i {
+    font-size: 1.25rem;
+}
+
+.alert-success-custom {
+    background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+    color: #065f46;
+    border-left: 4px solid #10b981;
+}
+
+.alert-danger-custom {
+    background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+    color: #991b1b;
+    border-left: 4px solid #ef4444;
+}
+
+/* Password strength indicator */
+.password-strength {
+    margin-top: 6px;
+    height: 4px;
+    background: #e5e7eb;
+    border-radius: 2px;
+    overflow: hidden;
+    display: none;
+}
+
+.password-strength.show {
+    display: block;
+}
+
+.password-strength-bar {
+    height: 100%;
+    transition: all 0.3s ease;
+    border-radius: 2px;
+}
+
+.password-strength-bar.weak {
+    width: 33%;
+    background: #ef4444;
+}
+
+.password-strength-bar.medium {
+    width: 66%;
+    background: #f59e0b;
+}
+
+.password-strength-bar.strong {
+    width: 100%;
+    background: #10b981;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .auth-right {
+        padding: 30px 25px !important;
+    }
+
+    .benefits-list {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+    }
+}

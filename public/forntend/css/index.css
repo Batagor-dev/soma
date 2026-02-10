@@ -1,0 +1,31 @@
+@font-face {
+    font-family: 'Atmospheric';
+    src: url('/Atmosphere-Regular.TTF') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+    font-family: 'Atmospheric', sans-serif;
+}
+
+
+:root {
+    --title-main: #faf1e0;  /* buih laut */
+    --title-sub:  #e0f7fa;  /* air laut */
+    --bs-success: #198754;
+    --bs-info: #0dcaf0;
+    --bs-warning: #ffc107;
+    --bs-danger: #dc3545;
+    --bs-light: #f8f9fa;
+    --bs-dark: #212529;
+}
+
+
+.text-title-main{
+    color: var(--title-main);
+}
+
+.text-title-sub{
+    color: var(--title-sub);
+}

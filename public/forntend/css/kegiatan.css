@@ -1,0 +1,47 @@
+.event-card {
+    border-radius: 16px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+    transition: all .3s ease;
+}
+
+.event-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+}
+
+.event-image {
+    height: 220px;
+    overflow: hidden;
+}
+
+.event-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.event-date {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: #fff;
+    border-radius: 12px;
+    padding: 6px 10px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+    line-height: 1.1;
+}
+
+.event-date .month {
+    font-size: 12px;
+    font-weight: 600;
+    color: #ff4d4f;
+    text-transform: uppercase;
+}
+
+.event-date .day {
+    font-size: 18px;
+    font-weight: 800;
+    color: #111;
+}

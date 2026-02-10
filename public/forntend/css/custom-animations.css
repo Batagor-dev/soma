@@ -1,0 +1,66 @@
+/* ===== NAVBAR SCROLL EFFECT ===== */
+.navbar {
+    transition: all 0.4s ease-in-out;
+    backdrop-filter: blur(10px);
+}
+.navbar-scrolled {
+    background-color: rgba(255, 255, 255, 0.95) !important;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* ===== HOVER EFFECT UNTUK KARTU ===== */
+.gallery-card, .event-card, .member-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+}
+.gallery-card:hover, .event-card:hover, .member-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* ===== LOADER ANIMASI ===== */
+#page-loader {
+    position: fixed;
+    inset: 0; /* FIX mobile overflow */
+    background: #ffffff;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #0d6efd; /* Warna primary Bootstrap */
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+#hero {
+    overflow: hidden;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@media (hover: hover) {
+    .gallery-card:hover,
+    .event-card:hover,
+    .member-card:hover {
+        transform: translateY(-10px);
+    }
+}
+
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+body.loading {
+    overflow: hidden;
+}
+
