@@ -1,34 +1,22 @@
 <?php
-
 namespace App\Http\Responses;
 
 use Laravel\Fortify\Contracts\LoginResponse as LoginResponseContract;
-use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Auth;
 
 class LoginResponse implements LoginResponseContract
 {
-    public function toResponse($request): Response
+    public function toResponse($request): JsonResponse
     {
-        $user = $request->user();
+        $token = auth('api')->login(Auth::user());
 
-        // 🚨 WAJIB: cek verifikasi email dulu
-        if (! $user->hasVerifiedEmail()) {
-            return redirect()->route('verification.notice');
-        }
-
-        if ($user->banned_at) {
-            auth()->logout();
-            return redirect()->route('login')
-                ->withErrors(['email' => 'Akun Anda telah diblokir.']);
-        }
-
-
-        // ADMIN / SUPER ADMIN
-        if ($user->hasRole(['Super Admin', 'Admin'])) {
-            return redirect()->route('dashboard');
-        }
-
-        // USER BIASA
-        return redirect()->route('home');
+        return response()->json([
+            'status' => true,
+            'message' => 'Login berhasil',
+            'user' => Auth::user(),
+            'token' => $token,
+            'type' => 'bearer'
+        ]);
     }
 }
