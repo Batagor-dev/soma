@@ -42,7 +42,7 @@ class AuthController extends Controller
             'email'    => request('email'),
             'password' => Hash::make(request('password')),
         ]);
-
+        
         if ($user) {
             return response()->json([
                 'success' => true,
