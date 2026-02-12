@@ -10,6 +10,7 @@ use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 use App\Models\Traits\HasUuid;
 use App\Models\KategoriProduk;
+use App\Models\Produk;
 
 class User extends Authenticatable implements MustVerifyEmail, JWTSubject
 {
@@ -88,5 +89,11 @@ class User extends Authenticatable implements MustVerifyEmail, JWTSubject
     {
         return $this->hasMany(KategoriProduk::class);
     }  
+
+    // Relasi dengan Produk
+    public function produks()
+    {
+        return $this->hasMany(Produk::class);
+    }
 
 }

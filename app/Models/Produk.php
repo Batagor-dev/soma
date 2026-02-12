@@ -4,17 +4,20 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
-use App\Models\Produk;
+use App\Models\KategoriProduk;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class KategoriProduk extends Model
+class Produk extends Model
 {
     use SoftDeletes;
 
     protected $fillable = [
         'user_id',
+        'kategori_produk_id',
         'nama',
         'deskripsi',
+        'harga',
+        'stok',
     ];
 
     // Relasi dengan User
@@ -22,10 +25,12 @@ class KategoriProduk extends Model
     {
         return $this->belongsTo(User::class);
     }
-    
-    // Relasi dengan Produk
-    public function produks()
+
+    // Relasi dengan KategoriProduk
+    public function kategori()
     {
-        return $this->hasMany(Produk::class);
+        return $this->belongsTo(KategoriProduk::class, 'kategori_produk_id')
+                    ->withTrashed();
     }
+
 }
