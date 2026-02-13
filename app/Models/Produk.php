@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use App\Models\KategoriProduk;
 use App\Models\RestokProduk;
+use App\Models\DetailTransaksi;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Produk extends Model
@@ -38,6 +39,12 @@ class Produk extends Model
     public function restok()
     {
         return $this->hasMany(RestokProduk::class);
+    }
+
+    // Relasi dengan DetailTransaksi
+    public function detailTransaksi()
+    {
+        return $this->hasMany(DetailTransaksi::class);
     }
 
 }

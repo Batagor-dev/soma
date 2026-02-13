@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Produk;
 use App\Models\KategoriProduk;
 use App\Models\RestokProduk;
+use App\Models\Transaksi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -179,33 +180,50 @@ class ProdukController extends Controller
             ], 404);
         }
 
-        $stokSebelum = $produk->stok;
-        $jumlahRestok = $request->jumlah;
+        $stokSebelum   = $produk->stok;
+        $jumlahRestok  = $request->jumlah;
+        $hargaBeli     = $produk->harga; // pastikan ada field ini
+        $totalKeluar   = $hargaBeli * $jumlahRestok;
 
-        DB::transaction(function () use ($produk, $jumlahRestok, $request) {
+        DB::transaction(function () use ($produk, $jumlahRestok, $request, $totalKeluar) {
 
+            // 1. Simpan histori restok
             RestokProduk::create([
                 'produk_id' => $produk->id,
                 'user_id'   => Auth::id(),
                 'jumlah'    => $jumlahRestok,
-                'keterangan'=> $request->keterangan
+                'keterangan'=> $request->keterangan,
+                'tanggal'    => $request->tanggal ?? now()
             ]);
 
+            // 2. Tambah stok
             $produk->increment('stok', $jumlahRestok);
+
+            // 3. Catat transaksi keluar
+            Transaksi::create([
+                'user_id'  => Auth::id(),
+                'tipe'     => 'KELUAR',
+                'sumber'   => 'RESTOK',
+                'total'    => $totalKeluar,
+                'deskripsi'=> 'Restok produk: ' . $produk->nama,
+                'tanggal'  => $request->tanggal ?? now()
+            ]);
         });
 
-        $produk->refresh(); // ambil stok terbaru
+        $produk->refresh();
 
         return response()->json([
             'success' => true,
-            'message' => 'Restok berhasil',
+            'message' => 'Restok berhasil dan transaksi keluar tercatat',
             'data' => [
-                'nama_produk'  => $produk->nama,
-                'stok_sebelum' => $stokSebelum,
-                'jumlah_tambah'=> $jumlahRestok,
-                'stok_sekarang'=> $produk->stok
+                'nama_produk'     => $produk->nama,
+                'stok_sebelum'    => $stokSebelum,
+                'jumlah_tambah'   => $jumlahRestok,
+                'stok_sekarang'   => $produk->stok,
+                'harga_beli'      => $hargaBeli,
+                'total_pengeluaran'=> $totalKeluar
             ]
         ], 200);
     }
-
+    
 }

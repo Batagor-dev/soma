@@ -11,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('restok_produks', function (Blueprint $table) {
+        Schema::create('transaksis', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('produk_id')->constrained('produks')->onDelete('cascade');
-            $table->foreignId('user_id')->constrained()->onDelete('cascade'); // siapa yang restok
-            $table->integer('jumlah'); // jumlah yang ditambahkan
-            $table->text('keterangan')->nullable();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->enum('tipe', ['MASUK', 'KELUAR']);
+            $table->string('sumber')->nullable();
+            $table->decimal('total', 15, 2);
+            $table->text('deskripsi')->nullable();
             $table->dateTime('tanggal');
             $table->softDeletes();
             $table->timestamps();
@@ -28,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('restok_produks');
+        Schema::dropIfExists('transaksis');
     }
 };
