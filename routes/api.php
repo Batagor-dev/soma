@@ -15,6 +15,14 @@ Route::prefix('auth')->group(function () {
 
 
 Route::middleware('auth:api')->group(function () {
+
+    // Kategori Produk
     Route::apiResource('kategori', KategoriProdukController::class);
+
+    // Restok Produk
+    Route::post('/produk/{produk}/restok', [ProdukController::class, 'restok']);
+    // Produk
     Route::apiResource('produk', ProdukController::class);
+
+   
 });

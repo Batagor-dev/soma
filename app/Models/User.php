@@ -11,6 +11,7 @@ use Spatie\Permission\Traits\HasRoles;
 use App\Models\Traits\HasUuid;
 use App\Models\KategoriProduk;
 use App\Models\Produk;
+use App\Models\RestokProduk;
 
 class User extends Authenticatable implements MustVerifyEmail, JWTSubject
 {
@@ -94,6 +95,12 @@ class User extends Authenticatable implements MustVerifyEmail, JWTSubject
     public function produks()
     {
         return $this->hasMany(Produk::class);
+    }
+
+    // Relasi dengan RestokProduk
+    public function restokProduks()
+    {
+        return $this->hasMany(RestokProduk::class);
     }
 
 }

@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Produk;
 use App\Models\KategoriProduk;
+use App\Models\RestokProduk;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\DB;
 
 class ProdukController extends Controller
 {
@@ -161,4 +163,49 @@ class ProdukController extends Controller
             'data'    => $produk
         ]);
     }
+
+    public function restok(Request $request, $id)
+    {
+        $request->validate([
+            'jumlah' => 'required|integer|min:1'
+        ]);
+
+        $produk = Produk::where('user_id', Auth::id())->find($id);
+
+        if (!$produk) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Produk tidak ditemukan atau bukan milik Anda'
+            ], 404);
+        }
+
+        $stokSebelum = $produk->stok;
+        $jumlahRestok = $request->jumlah;
+
+        DB::transaction(function () use ($produk, $jumlahRestok, $request) {
+
+            RestokProduk::create([
+                'produk_id' => $produk->id,
+                'user_id'   => Auth::id(),
+                'jumlah'    => $jumlahRestok,
+                'keterangan'=> $request->keterangan
+            ]);
+
+            $produk->increment('stok', $jumlahRestok);
+        });
+
+        $produk->refresh(); // ambil stok terbaru
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Restok berhasil',
+            'data' => [
+                'nama_produk'  => $produk->nama,
+                'stok_sebelum' => $stokSebelum,
+                'jumlah_tambah'=> $jumlahRestok,
+                'stok_sekarang'=> $produk->stok
+            ]
+        ], 200);
+    }
+
 }
