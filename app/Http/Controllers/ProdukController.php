@@ -40,6 +40,7 @@ class ProdukController extends Controller
                 return [
                     'id'          => $item->id,
                     'nama'        => $item->nama,
+                    'foto'        => $item->foto ? asset('storage/' . $item->foto) : null,
                     'deskripsi'   => $item->deskripsi,
                     'harga'       => $item->harga,
                     'stok'        => $item->stok,
@@ -55,6 +56,7 @@ class ProdukController extends Controller
         $validator = Validator::make($request->all(), [
             'kategori_produk_id' => 'required|exists:kategori_produks,id',
             'nama'               => 'required|string|max:255',
+            'foto'               => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'deskripsi'          => 'nullable|string',
             'harga'              => 'required|numeric|min:0',
             'stok'               => 'required|integer|min:0',
@@ -72,6 +74,7 @@ class ProdukController extends Controller
             'user_id'            => Auth::id(),
             'kategori_produk_id' => $request->kategori_produk_id,
             'nama'               => $request->nama,
+            'foto'               => $request->foto ? $request->file('foto')->store('produk_fotos', 'public') : null,
             'deskripsi'          => $request->deskripsi,
             'harga'              => $request->harga,
             'stok'               => $request->stok,
@@ -117,6 +120,7 @@ class ProdukController extends Controller
         $validator = Validator::make($request->all(), [
             'kategori_produk_id' => 'required|exists:kategori_produks,id',
             'nama'               => 'required|string|max:255',
+            'foto'               => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'deskripsi'          => 'nullable|string',
             'harga'              => 'required|numeric|min:0',
             'stok'               => 'required|integer|min:0',
@@ -133,6 +137,7 @@ class ProdukController extends Controller
         $produk->update($request->only([
             'kategori_produk_id',
             'nama',
+            'foto',
             'deskripsi',
             'harga',
             'stok'
