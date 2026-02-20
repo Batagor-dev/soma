@@ -68,8 +68,8 @@ class KasirController extends Controller
             // 1️⃣ Buat transaksi dulu (total masih 0)
             $transaksi = Transaksi::create([
                 'user_id'  => Auth::id(),
-                'tipe'     => 'MASUK',
-                'sumber'   => 'KASIR',
+                'tipe'     => 'Masuk',
+                'sumber'   => 'Kasir',
                 'total'    => 0,
                 'deskripsi'=> 'Transaksi kasir',
                 'tanggal'  => $request->tanggal ?? now()

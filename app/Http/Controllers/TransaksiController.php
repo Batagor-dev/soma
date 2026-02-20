@@ -43,7 +43,7 @@ class TransaksiController extends Controller
         try {
             $transaksi = Transaksi::create([
                 'user_id'   => Auth::id(),
-                'tipe'      => 'KELUAR',
+                'tipe'      => 'Keluar',
                 'sumber'    => $request->sumber,
                 'total'     => $request->total,
                 'deskripsi' => $request->deskripsi,

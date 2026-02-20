@@ -36,6 +36,19 @@ class HomeController extends Controller
             ->where('tipe', 'masuk')
             ->sum('total');
 
+        // Last Transaksi
+        $transaksiTerbaru = Transaksi::where('user_id', $user->id)
+            ->orderBy('created_at', 'desc')
+            ->limit(5)
+            ->get([
+                'id',
+                'tipe',
+                'sumber',
+                'total',
+                'deskripsi',
+                'tanggal',
+            ]);
+
         //Last updated stok
         $stokTerbaru = Produk::where('user_id', $user->id)
             ->orderBy('updated_at', 'desc')
@@ -54,7 +67,6 @@ class HomeController extends Controller
                 'username' => $user->username,
                 'name' => $user->name,
                 'email' => $user->email,
-                'roles' => $user->getRoleNames(),
             ],
             'pengeluaran' => [
                 'harian' => $pengeluaranHarian,
@@ -64,6 +76,7 @@ class HomeController extends Controller
                 'harian' => $pemasukanHarian,
                 'total'  => $pemasukanTotal,
             ],
+            'transaksi_terbaru' => $transaksiTerbaru,
             'stok_terbaru' => $stokTerbaru,
         ]);
     }
