@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KategoriProdukController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\KasirController;
@@ -17,6 +18,9 @@ Route::prefix('auth')->group(function () {
 
 
 Route::middleware('auth:api')->group(function () {
+
+    // Home
+    Route::get('home', [HomeController::class, 'index']);
 
     // Kategori Produk
     Route::apiResource('kategori', KategoriProdukController::class);
