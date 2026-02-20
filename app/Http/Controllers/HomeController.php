@@ -12,28 +12,33 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $user = $request->user();
+        $user = auth()->user();
 
         $today = now()->toDateString();
 
         // Pengeluaran           
-        $pengeluaranHarian = Transaksi::where('tipe', 'keluar')
+        $pengeluaranHarian = Transaksi::where('user_id', $user->id)
+            ->where('tipe', 'keluar')
             ->whereDate('created_at', $today)
             ->sum('total');
 
-        $pengeluaranTotal = Transaksi::where('tipe', 'keluar')
+        $pengeluaranTotal = Transaksi::where('user_id', $user->id)
+            ->where('tipe', 'keluar')
             ->sum('total');
 
         // Pemasukan
-        $pemasukanHarian = Transaksi::where('tipe', 'masuk')
+        $pemasukanHarian = Transaksi::where('user_id', $user->id)
+            ->where('tipe', 'masuk')
             ->whereDate('created_at', $today)
             ->sum('total');
 
-        $pemasukanTotal = Transaksi::where('tipe', 'masuk')
+        $pemasukanTotal = Transaksi::where('user_id', $user->id)
+            ->where('tipe', 'masuk')
             ->sum('total');
 
         //Last updated stok
-        $stokTerbaru = Produk::orderBy('updated_at', 'desc')
+        $stokTerbaru = Produk::where('user_id', $user->id)
+            ->orderBy('updated_at', 'desc')
             ->limit(5)
             ->get([
                 'id',
