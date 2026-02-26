@@ -19,38 +19,40 @@ class ProdukController extends Controller
         $this->middleware('auth:api');
     }
 
-    public function index()
-    {
-        $produk = Produk::where('user_id', Auth::id())
-            ->with('kategori')
-            ->get();
+ public function index(Request $request)
+{
+    $query = Produk::where('user_id', Auth::id())->with('kategori');
 
-        if ($produk->isEmpty()) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Data produk tidak ditemukan',
-                'data'    => []
-            ], 404);
-        }
-
-        return response()->json([
-            'success' => true,
-            'message' => 'Data produk berhasil ditampilkan',
-            'data'    => $produk->map(function ($item) {
-                return [
-                    'id'          => $item->id,
-                    'nama'        => $item->nama,
-                    'foto'        => $item->foto ? asset('storage/' . $item->foto) : null,
-                    'deskripsi'   => $item->deskripsi,
-                    'harga'       => $item->harga,
-                    'stok'        => $item->stok,
-                    'kategori' => $item->kategori ? $item->kategori->nama : 'Tidak ditemukan',
-
-                ];
-            })
-        ], 200);
+    if ($request->has('kategori_id') && $request->kategori_id) {
+        $query->where('kategori_produk_id', $request->kategori_id);
     }
 
+    $produk = $query->get();
+
+    if ($produk->isEmpty()) {
+        return response()->json([
+            'success' => false,
+            'message' => 'Data produk tidak ditemukan',
+            'data'    => []
+        ], 404);
+    }
+
+    return response()->json([
+        'success' => true,
+        'message' => 'Data produk berhasil ditampilkan',
+        'data'    => $produk->map(function ($item) {
+            return [
+                'id'        => $item->id,
+                'nama'      => $item->nama,
+                'foto'      => $item->foto ? asset('storage/' . $item->foto) : null,
+                'deskripsi' => $item->deskripsi,
+                'harga'     => $item->harga,
+                'stok'      => $item->stok,
+                'kategori'  => $item->kategori ? $item->kategori->nama : 'Tidak ditemukan',
+            ];
+        })
+    ], 200);
+}
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -118,12 +120,12 @@ class ProdukController extends Controller
         }
 
         $validator = Validator::make($request->all(), [
-            'kategori_produk_id' => 'required|exists:kategori_produks,id',
-            'nama'               => 'required|string|max:255',
+            'kategori_produk_id' => 'sometimes|exists:kategori_produks,id',
+            'nama'               => 'sometimes|string|max:255',
             'foto'               => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'deskripsi'          => 'nullable|string',
-            'harga'              => 'required|numeric|min:0',
-            'stok'               => 'required|integer|min:0',
+            'harga'              => 'sometimes|numeric|min:0',
+            'stok'               => 'sometimes|integer|min:0',
         ]);
 
         if ($validator->fails()) {
@@ -132,6 +134,11 @@ class ProdukController extends Controller
                 'message' => 'Validasi gagal',
                 'errors'  => $validator->errors()
             ], 422);
+        }
+
+        if ($request->hasFile('foto')) {
+            $path = $request->file('foto')->store('produk_fotos', 'public');
+            $produk->foto = $path;
         }
 
         $produk->update($request->only([
