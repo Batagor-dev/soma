@@ -160,7 +160,11 @@ class AuthController extends Controller
      */
     public function me()
     {
-        return response()->json(auth()->user());
+        return response()->json([
+            'success' => true,
+            'data' => auth()->user(),
+            'message' => 'Data berhasil ditemukan'
+        ]);
     }
 
     /**

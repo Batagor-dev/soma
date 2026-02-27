@@ -43,7 +43,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'User',
             'email' => 'user@gmail.com',
             'email_verified_at' => '2022-08-16 20:57:19',
-            'password' => Hash::make('#uUseq134#')
+            'password' => Hash::make('user1234')
         ]);
 
         $user->assignRole('User');
